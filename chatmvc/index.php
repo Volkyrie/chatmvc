@@ -1,6 +1,7 @@
 <?php
 
 use MyApp\Controllers\loginController;
+use MyApp\Models\loginModel;
 
 require_once 'vendor/autoload.php';
 

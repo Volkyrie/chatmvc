@@ -24,7 +24,27 @@
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-12 offset-md-3">
                 <form name="signup" method="post" action="signup">
-                    <!-- TODO -->
+                    <div class="form-group">
+                        <label>Entrez votre pseudo</label>
+                        <input class="form-control" type="text" name="pseudo" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Entrez votre Email</label>
+                        <input class="form-control" type="text" name="email" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mot de passe</label>
+                        <input class="form-control" type="password" name="password" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Confirmez le mot de passe</label>
+                        <input class="form-control" type="password" name="password-check" />
+                    </div>
+
+                    <button type="submit" name="signup" class="btn btn-info"> ENREGISTRER </button>&nbsp;&nbsp;&nbsp;<a href="/chatmvc/chatmvc/">J'ai déjà un compte!</a>
                 </form>
             </div>
         </div>

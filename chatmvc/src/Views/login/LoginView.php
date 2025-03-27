@@ -33,11 +33,11 @@
             <label>Mot de passe</label>
             <input class="form-control" type="password" name="password" />
             <p class="help-block">
-              <a href="/chatmvc/login/forgotpassword">Mot de passe oublié ?</a>
+              <a href="/chatmvc/chatmvc/login/forgotpassword">Mot de passe oublié ?</a>
             </p>
           </div>
 
-          <button type="submit" name="login" class="btn btn-info">LOGIN </button>&nbsp;&nbsp;&nbsp;<a href="/chatmvcsoluce/login/signup">Je n'ai pas de compte</a>
+          <button type="submit" name="login" class="btn btn-info">LOGIN </button>&nbsp;&nbsp;&nbsp;<a href="/chatmvc/chatmvc/login/signup">Je n'ai pas de compte</a>
 
         </form>
       </div>

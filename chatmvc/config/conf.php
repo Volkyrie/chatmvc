@@ -7,7 +7,7 @@ class Conf
 
     public function appUrl()
     {
-        $siteUrl = "http://localhost/chatmvc/chatmvc";
+        $siteUrl = "http://localhost/chatmvc/chatmvc/src";
         return $siteUrl;
     }
 }
