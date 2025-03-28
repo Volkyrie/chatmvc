@@ -23,12 +23,35 @@ class loginController
 	 */
 	public function loginIndex()
 	{
-		$this->render(ROOT.'/src/Views/login/LoginView.php');
+		if (isset($_POST['login'])){
+			$name = strip_tags($_POST['pseudo']);
+			$password = strip_tags($_POST['password']);
+
+			if($this->oLoginModel->existsUser($name, $password)) {
+				echo "<script>alert('Vous êtes connecté');</script>";
+				$this->render(ROOT.'/src/Views/chat/ChatView.php');
+			} else {
+				echo "<script>alert('Votre mot de passe est incorrect');</script>";
+				$this->render(ROOT.'/src/Views/login/LoginView.php');
+			}
+		} else {
+			$this->render(ROOT.'/src/Views/login/LoginView.php');
+		}
 	}
 
 	public function signup()
 	{
-		$this->render(ROOT.'/src/Views/login/SignupView.php');
+		if (isset($_POST['signup'])){
+			$name = strip_tags($_POST['pseudo']);
+			$email = strip_tags($_POST['email']);
+			$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+			$this->oLoginModel->createUser($name, $password, $email);
+			echo "<script>alert('Vous avez été inscrit');</script>";
+			$this->render(ROOT.'/src/Views/login/LoginView.php');
+		} else {
+			$this->render(ROOT.'/src/Views/login/SignupView.php');
+		}
 	}
 
 	public function forgotpassword()

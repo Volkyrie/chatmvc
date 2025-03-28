@@ -24,7 +24,7 @@
 				foreach ($data['rooms'] as $room) {
 				?>
 					<div style="margin-bottom: 10px">
-						<a href="<?php echo $room['room_id']; ?>"><?php echo $room['room_name'] ?></a>
+						<a href="<?php echo $room['id']; ?>"><?php echo $room['name'] ?></a>
 					</div>
 				<?php
 				}
@@ -40,9 +40,9 @@
 				<div class="chat-wrapper">
 					<div id="message-box">
 						<?php foreach ($data['messages'] as $msg) { ?>
-							<div><span class="user_name" style="color:<?php echo $msg['msg_color']; ?>"><?php echo $msg['user_name']; ?></span>
-								<span style="color:<?php echo $msg['msg_color']; ?>"><i><?php echo date('d/m/Y H:i:s', $msg['msg_date']); ?></i></span> :<br>
-								<span class=" user_message"> <?php echo $msg['msg_text']; ?> </span>
+							<div><span class="user_name" style="color:<?php echo $msg['color']; ?>"><?php echo $msg['user_id']; ?></span>
+								<span style="color:<?php echo $msg['color']; ?>"><i><?php echo date('d/m/Y H:i:s', $msg['date']); ?></i></span> :<br>
+								<span class=" user_message"> <?php echo $msg['text']; ?> </span>
 							</div>
 						<?php } ?>
 
