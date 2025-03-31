@@ -12,7 +12,7 @@
 	<!-- BOOTSTRAP CORE STYLE  -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<!-- CUSTOM STYLE  -->
-	<link href="../../css/style.css" rel="stylesheet" />
+	<link href="../public/css/style.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -24,7 +24,7 @@
 				foreach ($data['rooms'] as $room) {
 				?>
 					<div style="margin-bottom: 10px">
-						<a href="<?php echo $room['id']; ?>"><?php echo $room['name'] ?></a>
+						<a href="<?php echo URL . '/chat/chatIndex/' . $room['roomId']; ?>"><?php echo $room['room_name'] ?></a>
 					</div>
 				<?php
 				}
@@ -40,7 +40,7 @@
 				<div class="chat-wrapper">
 					<div id="message-box">
 						<?php foreach ($data['messages'] as $msg) { ?>
-							<div><span class="user_name" style="color:<?php echo $msg['color']; ?>"><?php echo $msg['user_id']; ?></span>
+							<div><span class="user_name" style="color:<?php echo $msg['color']; ?>"><?php echo $msg['user_name']; ?></span>
 								<span style="color:<?php echo $msg['color']; ?>"><i><?php echo date('d/m/Y H:i:s', $msg['date']); ?></i></span> :<br>
 								<span class=" user_message"> <?php echo $msg['text']; ?> </span>
 							</div>
@@ -61,6 +61,6 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="../../js/chat.js"></script>
+<script src="../public/js/chat.js"></script>
 
 </html>

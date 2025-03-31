@@ -17,12 +17,14 @@ class ChatController
 
 	public function chatIndex()
 	{
-		$data['room_id'] = 1;
-		$data['user'] = "test";
-		$data['currentroomid'] = 1;
-		$data['currentroom'] = "Testing room";
+		$roomNb = 1;
+		$messages = $this->oChatModel->getMessages($roomNb);
+		$data['room_id'] = $messages[0]['room_id'];
+		$data['user'] = $_SESSION['user'];
+		$data['currentroomid'] = $messages[0]['room_id'];
+		$data['currentroom'] = $messages[0]['room_name'];
 		$data['rooms'] = $this->oChatModel->getRooms();
-		$data['messages'] = $this->oChatModel->getMessages(1);
+		$data['messages'] = $messages;
 		$this->render(ROOT.'/src/Views/chat/ChatView.php', $data);
 	}
 

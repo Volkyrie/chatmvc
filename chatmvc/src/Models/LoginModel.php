@@ -17,7 +17,7 @@ class loginModel
 
 	public function existsUser($name, $password)
 	{
-		$sql  = "SELECT * FROM users WHERE name=:name";
+		$sql  = "SELECT * FROM users WHERE user_name=:name";
         $stmt = $this->dbh->prepare($sql);
         $stmt->bindParam(":name", $name);
         $stmt->execute();
@@ -28,7 +28,7 @@ class loginModel
 
 	public function createUser($name, $password, $email)
 	{
-		$sql  = "INSERT INTO users (name, password, email) VALUES (:name, :password, :email)";
+		$sql  = "INSERT INTO users (user_name, password, email) VALUES (:name, :password, :email)";
         $stmt = $this->dbh->prepare($sql);
         $stmt->bindParam(':name', $name);
 		$stmt->bindParam(':password', $password);

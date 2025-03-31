@@ -35,7 +35,13 @@ class chatModel
 
 	public function getMessages($roomId)
 	{
-		$sql  = "SELECT * FROM messages WHERE room_id=:roomId";
+		$sql  = "SELECT * FROM
+				(SELECT * FROM messages
+				JOIN rooms ON messages.room_id=rooms.roomId
+				JOIN users ON messages.user_id=users.userId
+				WHERE room_id=:roomId
+				ORDER BY `messages`.`date` DESC LIMIT 10)
+				as msg ORDER BY msg.date";
         $stmt = $this->dbh->prepare($sql);
         $stmt->bindParam(":roomId", $roomId);
         $stmt->execute();
