@@ -50,6 +50,7 @@ $("#message").on("keydown", function(event) {
 function send_message() {
     var message_input = $('#message'); //user message text
     var name_input = $('#name'); //user name
+    var color_input = $('#color'); //user color
 
     if (message_input.val() == "") { //empty name?
         alert("Enter your Name please!");
@@ -60,15 +61,26 @@ function send_message() {
         return;
     }
 
+    if (color_input.val() == "") { //emtpy color?
+        color_input = "orange";
+        return;
+    }
+
     //prepare json data
     var msg = {
         message: message_input.val(),
         name: name_input.val(),
-        color: '<?php echo $colors[$color_pick]; ?>'
+        color: color_input.val()
     };
 
     // Envoyr les données du message à la base de données
+    //store_message(msg);
     //convert and send data to server
     websocket.send(JSON.stringify(msg));
     message_input.val(''); //reset message input
+}
+
+//store msg
+function store_message(msg) {
+    fetch('../../chat/insertMessage')
 }

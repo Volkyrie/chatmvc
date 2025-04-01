@@ -33,7 +33,7 @@ class loginController
 			if($this->oLoginModel->existsUser($name, $password)) {
 				$_SESSION['user'] = $name;
 				$_SESSION['color'] = $pickedColor;
-				$url = URL . "/chat/chatIndex";
+				$url = URL . "/chat/chatIndex/1";
 				header("Location: $url");
 			} else {
 				echo "<script>alert('Votre mot de passe est incorrect');</script>";
