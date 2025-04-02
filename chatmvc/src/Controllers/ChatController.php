@@ -16,13 +16,15 @@ class ChatController
 	}
 
 	public function insert() {
-		$userId = $_GET['userId'];
-		$roomId = $_GET['roomId'];
-		$message = $_GET['msg'];
-		$date = $_GET['date'];
-		$color = $_GET['color'];
-		
-		$this->oChatModel->insertMessage($userId, $roomId, $message, $date, $color);
+		$data = json_decode(file_get_contents('php://input'), true);
+		$user = $data['name'];
+		$userId = $this->oChatModel->getUserId($user);
+		$roomId = $data['room'];
+		$message = $data['message'];
+		$color = $data['color'];
+
+		$this->oChatModel->insertMessage($userId->userId, $roomId, $message, $color);
+		echo json_encode(array("rep" => "ok"));
 	}
 
 	public function chatIndex()
@@ -34,7 +36,6 @@ class ChatController
 			$roomNb = 1;
 		}
 		$messages = $this->oChatModel->getMessages($roomNb);
-		error_log(print_r($messages, 1));
 		$data['currentroomid'] = $roomNb;
 		$data['room_id'] = $roomNb;
 		$data['user'] = $_SESSION['user'];

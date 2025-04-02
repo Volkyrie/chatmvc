@@ -50,6 +50,7 @@ $("#message").on("keydown", function(event) {
 function send_message() {
     var message_input = $('#message'); //user message text
     var name_input = $('#name'); //user name
+    var room_input = $('#room'); //room name
     var color_input = $('#color'); //user color
 
     if (message_input.val() == "") { //empty name?
@@ -61,8 +62,13 @@ function send_message() {
         return;
     }
 
+    if (room_input.val() == "") { //emtpy room?
+        alert("Room was not found!");
+        return;
+    }
+
     if (color_input.val() == "") { //emtpy color?
-        color_input = "orange";
+        alert("Color was not found!");
         return;
     }
 
@@ -70,11 +76,12 @@ function send_message() {
     var msg = {
         message: message_input.val(),
         name: name_input.val(),
+        room: room_input.val(),
         color: color_input.val()
     };
 
     // Envoyr les données du message à la base de données
-    //store_message(msg);
+    store_message(msg);
     //convert and send data to server
     websocket.send(JSON.stringify(msg));
     message_input.val(''); //reset message input
@@ -82,5 +89,13 @@ function send_message() {
 
 //store msg
 function store_message(msg) {
-    fetch('../../chat/insertMessage')
+    fetch(`/chatmvc/chatmvc/chat/insert`, {
+        method: "POST",
+        body: JSON.stringify(msg),
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+    .then(response => response.json())
+    .catch(error => console.log('An error has occured during msg save: ', error));
 }

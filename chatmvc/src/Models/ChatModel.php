@@ -14,9 +14,19 @@ class chatModel
 		$this->dbh = $dbh->getConnection();
 	}
 
-	public function insertMessage(int $userId, int $roomId, string $message, int $date, string $color)
+	public function getUserId($userName) {
+		$sql = "SELECT * FROM users WHERE user_name=:userName";
+		$stmt = $this->dbh->prepare($sql);
+		$stmt->bindParam(':userName', $userName);
+		$stmt->execute();
+		$userId = $stmt->fetch(\PDO::FETCH_OBJ);
+		return $userId;
+	}
+
+	public function insertMessage(int $userId, int $roomId, string $message, string $color)
 	{
-		$sql  = "INSERT INTO users (user_id, room_id, text, date, color) VALUES (:user, :room, :msg, :date, :color)";
+		$date = time();
+		$sql  = "INSERT INTO messages (user_id, room_id, text, date, color) VALUES (:user, :room, :msg, :date, :color)";
         $stmt = $this->dbh->prepare($sql);
         $stmt->bindParam(':user', $userId);
 		$stmt->bindParam(':room', $roomId);
@@ -48,7 +58,6 @@ class chatModel
         $stmt->bindParam(":roomId", $roomId);
         $stmt->execute();
         $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-		error_log(print_r($data, 1));
 		if(!isset($data[0]['user_name'])) {
 			$sql = "SELECT * FROM rooms WHERE roomId=:roomId";
 			$stmt = $this->dbh->prepare($sql);
