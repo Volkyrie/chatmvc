@@ -50,6 +50,10 @@ class ChatController
 		$this->render(ROOT.'/src/Views/chat/ChatView.php', $data);
 	}
 
+	public function search() {
+		$this->render(ROOT.'/src/Views/chat/SearchView.php', $_SESSION);
+	}
+
 	public function render(string $fichier, array $data = []): void {
 		require_once($fichier);
 		$data = $data;

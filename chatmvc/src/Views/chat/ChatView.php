@@ -42,12 +42,13 @@
 						<?php
 							if($data['isset'] == 1) {
 								foreach ($data['messages'] as $msg) { ?>
-									<div><span class="user_name" style="color:<?php echo $msg['color']; ?>"><?php echo $msg['user_name']; ?></span>
+									<div>
+										<span class="user_name" style="color:<?php echo $msg['color']; ?>"><?php echo $msg['user_name']; ?></span>
 										<span style="color:<?php echo $msg['color']; ?>"><i><?php echo date('d/m/Y H:i:s', $msg['date']); ?></i></span> :<br>
 										<span class=" user_message"> <?php echo $msg['text']; 
-										}?> </span>
+										?> </span>
 									</div>
-									
+								<?php } ?>
 						<?php } ?>
 
 					</div>

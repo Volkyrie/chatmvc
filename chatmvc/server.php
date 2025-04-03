@@ -57,7 +57,8 @@ while (true) {
 					'name' =>    $tst_msg['name'], //sender name
 					'message' => $tst_msg['message'], //message text
 					'color' =>   $tst_msg['color'], // user color
-					'date' =>    time() // date meassge
+					'date' =>    time(), // date meassge
+					'room' => $tst_msg['room'] //room
 				)));
 				send_message($response_text); //send data
 				break 2; //exist this loop

@@ -6,25 +6,28 @@ websocket = new WebSocket(wsUri);
 websocket.onopen = function(ev) { // connection is open 
     msgBox.append('<div class="system_msg" style="color:#bbbbbb">Welcome to my "Demo WebSocket Chat box"!</div>'); //notify user
 }
+
 // Message received from server
 websocket.onmessage = function(ev) {
     var response = JSON.parse(ev.data); //PHP sends Json data
-
     var res_type = response.type; //message type
     var user_message = response.message; //message text
     var user_name = response.name; //user name
     var user_color = response.color; //color
+    var user_room = response.room; //user room
+    var current_room = $('#room').val(); //current room
 
-    switch (res_type) {
-        case 'usermsg':
-            msgBox.append('<div><span class="user_name" style="color:' + user_color + '">' + user_name + '</span> : <span class="user_message">' + user_message + '</span></div>');
-            break;
-        case 'system':
-            msgBox.append('<div style="color:#bbbbbb">' + user_message + '</div>');
-            break;
+    if(user_room == current_room) {
+        switch (res_type) {
+            case 'usermsg':
+                msgBox.append('<div><span class="user_name" style="color:' + user_color + '">' + user_name + '</span> : <span class="user_message">' + user_message + '</span></div>');
+                break;
+            case 'system':
+                msgBox.append('<div style="color:#bbbbbb">' + user_message + '</div>');
+                break;
+        }
+        msgBox[0].scrollTop = msgBox[0].scrollHeight; //scroll message
     }
-    msgBox[0].scrollTop = msgBox[0].scrollHeight; //scroll message 
-
 };
 
 websocket.onerror = function(ev) {
@@ -80,7 +83,7 @@ function send_message() {
         color: color_input.val()
     };
 
-    // Envoyr les données du message à la base de données
+    // Envoyer les données du message à la base de données
     store_message(msg);
     //convert and send data to server
     websocket.send(JSON.stringify(msg));
