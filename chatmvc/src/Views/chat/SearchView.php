@@ -8,7 +8,7 @@
     <!-- BOOTSTRAP CORE STYLE  -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- CUSTOM STYLE  -->
-    <link href="../../css/style.css" rel="stylesheet" />
+    <link href="../public/css/style.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -23,14 +23,15 @@
         <div class="row">
             <div class="col-12">
                 <form>
-                    <input type="text" id="keyword" placeholder="Saisir un mot clé">
+                    <input type="text" name="keyword" id="keyword" placeholder="Saisir un mot clé">
                     <input type="button" id="submit" value="Envoyer" />
                 </form>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <div id="filteredmsg"></div>
+                <div id="filteredmsg">
+                </div>
             </div>
         </div>
     </div>
@@ -47,13 +48,13 @@
             let str = $("#keyword").val();
             // Si la chaine n'est pas vide, on fait l'appel AJAX
             if (str != '') {
-                // Appel avec une méthode POST
-                // Le valeur passée au serveur sous forme d'un objet JSON
+                // Appel avec une méthode POST              
                 // Les messages sont renvoyés dans la variable returnData
                 $.post('search', {
                     keyword: str
                 }, function(returnData) {
                     // On affiche les messages provenant de la réponse du serveur
+                    $("#filteredmsg").empty();
                     $("#filteredmsg").append(returnData);
                 })
             }

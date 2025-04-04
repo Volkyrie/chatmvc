@@ -51,7 +51,22 @@ class ChatController
 	}
 
 	public function search() {
-		$this->render(ROOT.'/src/Views/chat/SearchView.php', $_SESSION);
+		if(isset($_POST['keyword'])) {
+			$keyword = $_POST['keyword'];
+			$data = $this->oChatModel->searchMessages($keyword);
+			$bkgdcolor = "#ADD8E6";
+			foreach($data as $key => $item) {
+				echo "<div style='background-color: ". $bkgdcolor ."'><span>".$item['user_name']." @ ".$item['room_name']." le ".date('d/m/Y H:i:s',$item['date'])." a écrit: <br>".$item['text']."</span></div><br>";
+				if($bkgdcolor != "#ADD8E6") {
+					$bkgdcolor = "#ADD8E6";
+				} else {
+					$bkgdcolor = "white";
+				}
+			}
+		} else {
+			$data['user'] = $_SESSION['user'];
+			$this->render(ROOT.'/src/Views/chat/SearchView.php', $data);
+		}
 	}
 
 	public function render(string $fichier, array $data = []): void {

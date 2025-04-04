@@ -67,4 +67,16 @@ class chatModel
 		}
 		return $data;
 	}
+
+	public function searchMessages($keyWord) {
+		$sql = "SELECT * FROM messages 
+				JOIN rooms ON messages.room_id=rooms.roomId
+				JOIN users ON messages.user_id=users.userId
+				WHERE MATCH (text) AGAINST (:keyWord)";
+		$stmt = $this->dbh->prepare($sql);
+        $stmt->bindParam(":keyWord", $keyWord);
+        $stmt->execute();
+        $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		return $data;
+	}
 }
